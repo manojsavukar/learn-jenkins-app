@@ -36,4 +36,10 @@ pipeline {
             }
         }
     }
+
+    Post {
+        always {
+            junit test-result/junit.xml
+        }
+    }
 }
