@@ -2,16 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('without docker') {
-            steps {
-                sh '''
-                    echo 'Hello World'
-                    ls -la
-                    touch container-no.txt
-                '''
-                
-            }
-        }
         stage('with docker') {
             agent {
                 docker {
@@ -21,10 +11,12 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo "with the docker"
                     ls -la
-                    pwd
-                    touch container-yes.txt
+                    node --version
+                    npm --version
+                    npm ci
+                    npm run build
+                    ls -la
                 '''
             }
         }
